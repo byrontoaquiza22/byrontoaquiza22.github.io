@@ -99,18 +99,19 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-        window.crearRegistro = function(){
-            const nombre = document.getElementById("nombre").value
-            const edad = document.getElementById("edad").value
-            console.log(nombre, edad);
+        window.crearRegistro = function () {
+                const nombre = document.getElementById("nombre").value;
+                const edad = document.getElementById("edad").value;
+                console.log(nombre, edad);
+                
+                push(
+                    ref(database, 'septimo'),
+                    {
+                        name: nombre,
+                        age: edad 
+                    }
+                );
 
-            push(
-                ref(database, 'septimo'),
-                {
-                    name: nombre,
-                    age: edad
-                }
-            );
         }
       </script>
 
