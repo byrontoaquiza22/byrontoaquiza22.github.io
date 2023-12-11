@@ -14,39 +14,41 @@
 
  <script type="module">
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "firebase/app";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getDatabase, ret, push, onValue, reove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
-
+      
         // Your web app's Firebase configuration
         const firebaseConfig = {
           apiKey: "AIzaSyCnkqE8eO4bQ6rqTQD_vbCFmHfE2UNu60o",
           authDomain: "conexion-43260.firebaseapp.com",
-          databaseURL: "https://conexion-43260-default-rtdb.firebaseio.com",
           projectId: "conexion-43260",
           storageBucket: "conexion-43260.appspot.com",
           messagingSenderId: "134709617383",
           appId: "1:134709617383:web:b9e4937b41ee963f883842"
         };
-
+      
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-            window.crearRegistro = function () {
+        window.crearRegistro = function () {
                 const nombre = document.getElementById("nombre").value;
                 const edad = document.getElementById("edad").value;
                 console.log(nombre, edad);
                 
                 push(
-                    ref(database, 'conexion'),
+                    ref(database, 'septimo'),
                     {
-                        name: nombre,
+                        name: nombre
                         age: edad 
                     }
                 );
 
-            }
-          </script>
-    </body>
+        }
+      </script>
+
+</body>
 </html>
+
