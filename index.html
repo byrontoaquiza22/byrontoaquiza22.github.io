@@ -115,15 +115,17 @@
         const database = getDatabase(app);
 
         window.crearRegistro = function () {
-                const nombre = document.getElementById("nombre").value;
-                const edad = document.getElementById("edad").value;
-                console.log(nombre, edad);
+                const modelo = document.getElementById("modelo").value;
+                const marca = document.getElementById("marca").value;
+                const anio = document.getElementById("anio").value;
+                console.log(modelo, marca, anio);
                 
                 push(
                     ref(database, 'septimo'),
                     {
-                        name: nombre,
-                        age: edad 
+                        name: modelo
+                        name: marca
+                        name: anio 
                     }
                 );
 
