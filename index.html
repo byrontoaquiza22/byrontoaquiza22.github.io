@@ -29,25 +29,24 @@
           appId: "1:134709617383:web:b9e4937b41ee963f883842"
         };
       
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+         // Initialize Firebase
+         const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
 
-        window.crearRegistro = function () {
-                const modelo = document.getElementById("nombre").value;
+            window.crearRegistro = function () {
+                const nombre = document.getElementById("nombre").value;
                 const edad = document.getElementById("edad").value;
-                console.log(modelo, edad);
+                console.log(nombre, edad);
                 
                 push(
                     ref(database, 'septimo'),
                     {
-                        name: nombre
+                        name: nombre,
                         age: edad 
                     }
                 );
 
-        }
-      </script>
-
-</body>
+            }
+          </script>
+    </body>
 </html>
