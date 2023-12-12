@@ -53,20 +53,18 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js"></script>
 
     <script>
-       
-        // Your web app's Firebase configuration
         const firebaseConfig = {
-        apiKey: "AIzaSyCnkqE8eO4bQ6rqTQD_vbCFmHfE2UNu60o",
-        authDomain: "conexion-43260.firebaseapp.com",
-        projectId: "conexion-43260",
-        storageBucket: "conexion-43260.appspot.com",
-        messagingSenderId: "134709617383",
-        appId: "1:134709617383:web:b9e4937b41ee963f883842"
+            apiKey: "AIzaSyCnkqE8eO4bQ6rqTQD_vbCFmHfE2UNu60o",
+            authDomain: "conexion-43260.firebaseapp.com",
+            projectId: "conexion-43260",
+            storageBucket: "conexion-43260.appspot.com",
+            messagingSenderId: "134709617383",
+            appId: "1:134709617383:web:b9e4937b41ee963f883842"
         };
 
         firebase.initializeApp(firebaseConfig);
 
-        window.crearRegistro() {
+        function crearRegistro() {
             var nombre = document.getElementById('nombre').value;
             var vehiculo = document.getElementById('vehiculo').value;
             var problema = document.getElementById('problema').value;
@@ -78,11 +76,9 @@
                     problema: problema
                 };
 
-                // Obtén una referencia a la base de datos de Firebase
                 var database = firebase.database();
                 var registrosRef = database.ref('registros');
 
-                // Guarda el nuevo registro en la base de datos
                 registrosRef.push(registro);
 
                 limpiarFormulario();
@@ -91,7 +87,7 @@
             }
         }
 
-        window.mostrarRegistro(key, registro) {
+        function mostrarRegistro(key, registro) {
             var registrosDiv = document.getElementById('registros');
 
             var registroDiv = document.createElement('div');
@@ -107,7 +103,7 @@
             registrosDiv.appendChild(registroDiv);
         }
 
-        window.editarRegistro(key, botonEditar) {
+        function editarRegistro(key, botonEditar) {
             var registroDiv = botonEditar.closest('.registro');
             var nombre = registroDiv.querySelector('h2').innerText;
             var vehiculo = registroDiv.querySelector('p:nth-child(2)').innerText.split(": ")[1];
@@ -124,21 +120,18 @@
             var registroDiv = botonEliminar.closest('.registro');
             registroDiv.remove();
 
-            // Obtén una referencia a la base de datos de Firebase
             var database = firebase.database();
             var registrosRef = database.ref('registros');
 
-            // Elimina el registro de la base de datos
             registrosRef.child(key).remove();
         }
 
-        window.limpiarFormulario() {
+        function limpiarFormulario() {
             document.getElementById('nombre').value = '';
             document.getElementById('vehiculo').value = '';
             document.getElementById('problema').value = '';
         }
 
-        // Cargar registros existentes desde Firebase al cargar la página
         var registrosRef = firebase.database().ref('registros');
         registrosRef.on('child_added', function(snapshot) {
             mostrarRegistro(snapshot.key, snapshot.val());
@@ -147,6 +140,7 @@
 
 </body>
 </html>
+
 
 
         <!--script type="module">
