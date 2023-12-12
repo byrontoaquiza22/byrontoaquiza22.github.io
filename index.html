@@ -15,7 +15,11 @@
             margin-bottom: 8px;
         }
 
-        .entry {
+        #registros {
+            margin-top: 20px;
+        }
+
+        .registro {
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
@@ -37,6 +41,7 @@
         <textarea id="problema" name="problema" rows="4" required></textarea>
 
         <button type="button" onclick="crearRegistro()">Crear</button>
+        <button type="button" onclick="limpiarFormulario()">Limpiar</button>
     </form>
 
     <div id="registros">
@@ -45,73 +50,62 @@
 
     <script>
         function crearRegistro() {
-            // Obtener los valores del formulario
             var nombre = document.getElementById('nombre').value;
             var vehiculo = document.getElementById('vehiculo').value;
             var problema = document.getElementById('problema').value;
 
-            // Crear un nuevo registro
-            var nuevoRegistro = {
-                nombre: nombre,
-                vehiculo: vehiculo,
-                problema: problema
-            };
+            if (nombre && vehiculo && problema) {
+                var registro = {
+                    nombre: nombre,
+                    vehiculo: vehiculo,
+                    problema: problema
+                };
 
-            // Mostrar el nuevo registro en la página
-            mostrarRegistro(nuevoRegistro);
-
-            // Puedes agregar aquí la lógica para enviar estos datos a Firebase
+                mostrarRegistro(registro);
+                limpiarFormulario();
+            } else {
+                alert("Por favor, completa todos los campos antes de crear un registro.");
+            }
         }
 
         function mostrarRegistro(registro) {
             var registrosDiv = document.getElementById('registros');
 
-            // Crear un elemento div para mostrar el registro
-            var entryDiv = document.createElement('div');
-            entryDiv.className = 'entry';
-            entryDiv.innerHTML = `
+            var registroDiv = document.createElement('div');
+            registroDiv.className = 'registro';
+            registroDiv.innerHTML = `
                 <h2>${registro.nombre}</h2>
                 <p><strong>Vehículo:</strong> ${registro.vehiculo}</p>
                 <p><strong>Problema:</strong> ${registro.problema}</p>
-                <button onclick="eliminarRegistro(this)">Eliminar</button>
                 <button onclick="editarRegistro(this)">Editar</button>
+                <button onclick="eliminarRegistro(this)">Eliminar</button>
             `;
 
-            // Agregar el nuevo elemento al contenedor de registros
-            registrosDiv.appendChild(entryDiv);
-
-            // Limpiar el formulario después de agregar un registro
-            document.getElementById('mecanicaForm').reset();
+            registrosDiv.appendChild(registroDiv);
         }
 
-        function eliminarRegistro(elemento) {
-            // Obtener el elemento padre (div.entry) del botón clicado
-            var entryDiv = elemento.closest('.entry');
+        function editarRegistro(botonEditar) {
+            var registroDiv = botonEditar.closest('.registro');
+            var nombre = registroDiv.querySelector('h2').innerText;
+            var vehiculo = registroDiv.querySelector('p:nth-child(2)').innerText.split(": ")[1];
+            var problema = registroDiv.querySelector('p:nth-child(3)').innerText.split(": ")[1];
 
-            // Eliminar el registro de la página
-            entryDiv.remove();
-
-            // Puedes agregar aquí la lógica para eliminar este registro de Firebase
-        }
-
-        function editarRegistro(elemento) {
-            // Obtener el elemento padre (div.entry) del botón clicado
-            var entryDiv = elemento.closest('.entry');
-
-            // Obtener los elementos del registro
-            var nombre = entryDiv.querySelector('h2').innerText;
-            var vehiculo = entryDiv.querySelector('p:nth-child(2)').innerText.split(": ")[1];
-            var problema = entryDiv.querySelector('p:nth-child(3)').innerText.split(": ")[1];
-
-            // Rellenar el formulario con los datos actuales
             document.getElementById('nombre').value = nombre;
             document.getElementById('vehiculo').value = vehiculo;
             document.getElementById('problema').value = problema;
 
-            // Eliminar el registro de la página
-            entryDiv.remove();
+            registroDiv.remove();
+        }
 
-            // Puedes agregar aquí la lógica para editar este registro en Firebase
+        function eliminarRegistro(botonEliminar) {
+            var registroDiv = botonEliminar.closest('.registro');
+            registroDiv.remove();
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('nombre').value = '';
+            document.getElementById('vehiculo').value = '';
+            document.getElementById('problema').value = '';
         }
     </script>
 
