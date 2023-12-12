@@ -1,37 +1,80 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Mecánica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-    </head>
-    <body>
-        <form id="crud-form">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id = "nombre">
-            <label for="edad">Edad:</label>
-            <input type="number" id = "edad">
-            <button type="button" onclick="crearRegistro()">Crear</button>
-        </form>
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
 
+    <h1>Formulario de Mecánica</h1>
 
- <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-        import { getDatabase, ret, push, onValue, reove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyCnkqE8eO4bQ6rqTQD_vbCFmHfE2UNu60o",
-          authDomain: "conexion-43260.firebaseapp.com",
-          projectId: "conexion-43260",
-          storageBucket: "conexion-43260.appspot.com",
-          messagingSenderId: "134709617383",
-          appId: "1:134709617383:web:b9e4937b41ee963f883842"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+    <form id="mecanicaForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="vehiculo">Vehículo:</label>
+        <input type="text" id="vehiculo" name="vehiculo" required>
+
+        <label for="problema">Problema:</label>
+        <textarea id="problema" name="problema" rows="4" required></textarea>
+
+        <button type="button" onclick="mostrarDatos()">Enviar</button>
+    </form>
+
+    <div id="resultados"></div>
+
+    <script>
+        function mostrarDatos() {
+            // Obtener los valores del formulario
+            var nombre = document.getElementById('nombre').value;
+            var vehiculo = document.getElementById('vehiculo').value;
+            var problema = document.getElementById('problema').value;
+
+            // Mostrar los datos en la página
+            var resultadosDiv = document.getElementById('resultados');
+            resultadosDiv.innerHTML = `
+                <h2>Datos Recopilados:</h2>
+                <p><strong>Nombre:</strong> ${nombre}</p>
+                <p><strong>Vehículo:</strong> ${vehiculo}</p>
+                <p><strong>Problema:</strong> ${problema}</p>
+            `;
+
+            // Puedes agregar aquí la lógica para enviar estos datos a Firebase
+        }
+    </script>
+
+        <script type="module">
+                // Import the functions you need from the SDKs you need
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+                import { getDatabase, ret, push, onValue, reove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+                // TODO: Add SDKs for Firebase products that you want to use
+                // https://firebase.google.com/docs/web/setup#available-libraries
+            
+                // Your web app's Firebase configuration
+                const firebaseConfig = {
+                apiKey: "AIzaSyCnkqE8eO4bQ6rqTQD_vbCFmHfE2UNu60o",
+                authDomain: "conexion-43260.firebaseapp.com",
+                projectId: "conexion-43260",
+                storageBucket: "conexion-43260.appspot.com",
+                messagingSenderId: "134709617383",
+                appId: "1:134709617383:web:b9e4937b41ee963f883842"
+                };
+            
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+                const database = getDatabase(app);
 
         window.crearRegistro = function () {
                 const nombre = document.getElementById("nombre").value;
