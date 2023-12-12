@@ -102,7 +102,7 @@ var firebaseConfig = {
           }).then((result) => {
           if (result.value) {
               let id = $(this).closest('tr').attr('id');
-              db.ref(`AngelicaLogacho/${id}`).remove() 
+              db.ref(`ToaquizaByron/${id}`).remove() 
               Swal.fire('¡Eliminado!', 'El registro ha sido eliminado.','success')
           }
           })        
