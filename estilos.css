@@ -1,85 +1,92 @@
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        background-color: #f5f5f5;
-    }
+/* Reset de estilos para normalizar el diseño en todos los navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    header {
-        background-color: #333;
-        color: #fff;
-        padding: 10px 0;
-        text-align: center;
-    }
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+}
 
-    header h1 {
-        margin: 0;
-    }
+/* Estilos para el encabezado */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
 
-    nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+header h1 {
+    margin: 0;
+}
 
-    nav ul li {
-        display: inline-block;
-        margin-right: 20px;
-    }
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-    nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-weight: bold;
-        font-size: 16px;
-    }
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
 
-    section {
-        padding: 20px 0;
-        background-color: #fff;
-    }
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
 
-    .container {
-        width: 80%;
-        margin: 0 auto;
-    }
+/* Estilos para la sección de reservas */
+#reservas {
+    padding: 40px 0;
+    background-color: #fff;
+}
 
-    form {
-        margin-bottom: 20px;
-    }
+.container1 {
+    width: 80%;
+    margin: 0 auto;
+}
 
-    form h1 {
-        text-align: center;
-        color: #333;
-    }
+form {
+    margin-bottom: 20px;
+}
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+form h1 {
+    text-align: center;
+    color: #333;
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
+.form-group {
+    margin-bottom: 15px;
+}
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
 
-    th {
-        background-color: #333;
-        color: #fff;
-    }
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
 
-    footer {
-        background-color: #333;
-        color: #fff;
-        padding: 10px 0;
-        text-align: center;
-    }
-</style>
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Estilos para el pie de página */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
