@@ -55,23 +55,30 @@
 
     <script>
         function crearRegistro() {
-            var nombre = document.getElementById('nombre').value;
-            var vehiculo = document.getElementById('vehiculo').value;
-            var problema = document.getElementById('problema').value;
+        var nombre = document.getElementById('nombre').value;
+        var vehiculo = document.getElementById('vehiculo').value;
+        var problema = document.getElementById('problema').value;
 
-            if (nombre && vehiculo && problema) {
-                var registro = {
-                    nombre: nombre,
-                    vehiculo: vehiculo,
-                    problema: problema
-                };
+        if (nombre && vehiculo && problema) {
+            var registro = {
+                nombre: nombre,
+                vehiculo: vehiculo,
+                problema: problema
+            };
 
-                mostrarRegistro(registro);
-                limpiarFormulario();
-            } else {
-                alert("Por favor, completa todos los campos antes de crear un registro.");
-            }
+            // Obtén una referencia a la base de datos de Firebase
+            var database = firebase.database();
+            var registrosRef = database.ref('registros');
+
+            // Guarda el nuevo registro en la base de datos
+            registrosRef.push(registro);
+
+            limpiarFormulario();
+        } else {
+            alert("Por favor, completa todos los campos antes de crear un registro.");
         }
+    }
+
 
         function mostrarRegistro(registro) {
             var registrosDiv = document.getElementById('registros');
