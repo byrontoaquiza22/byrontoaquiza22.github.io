@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Mecánica</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js"></script>
-
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,34 +48,55 @@
         <!-- Aquí se mostrarán los registros -->
     </div>
 
-    <script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getDatabase, ret, push, onValue, reove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+    
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyCnkqE8eO4bQ6rqTQD_vbCFmHfE2UNu60o",
+        authDomain: "conexion-43260.firebaseapp.com",
+        projectId: "conexion-43260",
+        storageBucket: "conexion-43260.appspot.com",
+        messagingSenderId: "134709617383",
+        appId: "1:134709617383:web:b9e4937b41ee963f883842"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
         function crearRegistro() {
-        var nombre = document.getElementById('nombre').value;
-        var vehiculo = document.getElementById('vehiculo').value;
-        var problema = document.getElementById('problema').value;
+            var nombre = document.getElementById('nombre').value;
+            var vehiculo = document.getElementById('vehiculo').value;
+            var problema = document.getElementById('problema').value;
 
-        if (nombre && vehiculo && problema) {
-            var registro = {
-                nombre: nombre,
-                vehiculo: vehiculo,
-                problema: problema
-            };
+            if (nombre && vehiculo && problema) {
+                var registro = {
+                    nombre: nombre,
+                    vehiculo: vehiculo,
+                    problema: problema
+                };
 
-            // Obtén una referencia a la base de datos de Firebase
-            var database = firebase.database();
-            var registrosRef = database.ref('registros');
+                // Obtén una referencia a la base de datos de Firebase
+                var database = firebase.database();
+                var registrosRef = database.ref('registros');
 
-            // Guarda el nuevo registro en la base de datos
-            registrosRef.push(registro);
+                // Guarda el nuevo registro en la base de datos
+                registrosRef.push(registro);
 
-            limpiarFormulario();
-        } else {
-            alert("Por favor, completa todos los campos antes de crear un registro.");
+                limpiarFormulario();
+            } else {
+                alert("Por favor, completa todos los campos antes de crear un registro.");
+            }
         }
-    }
 
-
-        function mostrarRegistro(registro) {
+        function mostrarRegistro(key, registro) {
             var registrosDiv = document.getElementById('registros');
 
             var registroDiv = document.createElement('div');
@@ -89,14 +105,14 @@
                 <h2>${registro.nombre}</h2>
                 <p><strong>Vehículo:</strong> ${registro.vehiculo}</p>
                 <p><strong>Problema:</strong> ${registro.problema}</p>
-                <button onclick="editarRegistro(this)">Editar</button>
-                <button onclick="eliminarRegistro(this)">Eliminar</button>
+                <button onclick="editarRegistro('${key}', this)">Editar</button>
+                <button onclick="eliminarRegistro('${key}', this)">Eliminar</button>
             `;
 
             registrosDiv.appendChild(registroDiv);
         }
 
-        function editarRegistro(botonEditar) {
+        function editarRegistro(key, botonEditar) {
             var registroDiv = botonEditar.closest('.registro');
             var nombre = registroDiv.querySelector('h2').innerText;
             var vehiculo = registroDiv.querySelector('p:nth-child(2)').innerText.split(": ")[1];
@@ -109,9 +125,16 @@
             registroDiv.remove();
         }
 
-        function eliminarRegistro(botonEliminar) {
+        function eliminarRegistro(key, botonEliminar) {
             var registroDiv = botonEliminar.closest('.registro');
             registroDiv.remove();
+
+            // Obtén una referencia a la base de datos de Firebase
+            var database = firebase.database();
+            var registrosRef = database.ref('registros');
+
+            // Elimina el registro de la base de datos
+            registrosRef.child(key).remove();
         }
 
         function limpiarFormulario() {
@@ -119,9 +142,19 @@
             document.getElementById('vehiculo').value = '';
             document.getElementById('problema').value = '';
         }
+
+        // Cargar registros existentes desde Firebase al cargar la página
+        var registrosRef = firebase.database().ref('registros');
+        registrosRef.on('child_added', function(snapshot) {
+            mostrarRegistro(snapshot.key, snapshot.val());
+        });
     </script>
 
-        <script type="module">
+</body>
+</html>
+
+
+        <!--script type="module">
                 // Import the functions you need from the SDKs you need
                 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
                 import { getDatabase, ret, push, onValue, reove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
