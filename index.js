@@ -1,12 +1,12 @@
 var firebaseConfig = {
 
-    apiKey: "AIzaSyCnkqE8eO4bQ6rqTQD_vbCFmHfE2UNu60o",
-                authDomain: "conexion-43260.firebaseapp.com",
-                databaseURL: "https://conexion-43260-default-rtdb.firebaseio.com/",
-                projectId: "conexion-43260",
-                storageBucket: "conexion-43260.appspot.com",
-                messagingSenderId: "134709617383",
-                appId: "1:134709617383:web:b9e4937b41ee963f883842"
+  apiKey: "AIzaSyBMJsVpnbOwVOiVNbTZScZdet9qlGigDL0",
+          authDomain: "conexion-8ec0d.firebaseapp.com",
+          databaseURL: "https://conexion-8ec0d-default-rtdb.firebaseio.com",
+          projectId: "conexion-8ec0d",
+          storageBucket: "conexion-8ec0d.appspot.com",
+          messagingSenderId: "679910299749",
+          appId: "1:679910299749:web:9800b464879628b4850e8c"
     };
   
     
